@@ -10,8 +10,7 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
-  clientid:any
-  order:any
+  clientId:any
   instruments:any
   client:any
   qe:any
@@ -21,23 +20,28 @@ export class OrderComponent implements OnInit {
   flag1:any
   direction:any
   direction1:any
-  BirthDate:any
   clientName:any
   instrumentId:any
   instrument:any
   instrumentDetails: any;
-  
+  clientDetails: any;
+  orderBuy:any  
+  orderSell:any
   constructor(private http:HttpClient,private service:DataService) {
     // this.quantity=
     // this.instruments;
 
-    
+    this.orderBuy={}
+    this.orderSell={}
     this.instrumentDetails={
       "instrumentId": "",
   "instrumentName": "",
   "faceValue": "",
   "expiryDate": ""
  
+    }
+    this.clientDetails={
+      "clientName":""
     }
     this.qe=100;
     this.flag=0;
@@ -54,21 +58,15 @@ export class OrderComponent implements OnInit {
     }
 
   ];
-    
-  this.order={
-    "clientid":this.client,
-    "instrumentid":this.instrument,
-    "price":this.price,
-    "quantity":this.quantity
-    
-  }
+
   }
   ngOnInit(): void {
    
     this.http.get("http://localhost:8080/clientDetails/"+this.service.getcustodianid())
 .subscribe((result:any)=>{
+  console.log(result)
 this.client = result.map((item: any) => {
-return { clientId: item.clientId, clientName: item.clientName };
+return { clientId: item.clientId, clientName: item.clientName,custodian:item.custodian };
 });
 },
 err=>{
@@ -84,6 +82,9 @@ this.instruments = result.map((item: any) => {
 err=>{
 console.log(err);
 })
+
+
+
 
   }
 
@@ -102,6 +103,18 @@ console.log(this.instrumentDetails)
 err=>{
 console.log(err);
 })
+  }
+
+  selected2(clientId1:any){
+    this.http.get("http://localhost:8080/clients/"+clientId1)
+.subscribe((result:any)=>{
+this.clientDetails = result;
+console.log(this.clientDetails);
+},
+err=>{
+console.log(err);
+})
+
   }
 
   selected(){
@@ -136,8 +149,74 @@ console.log(err);
     this.flag=0;
     // console.log(orderForm.value);
     // console.log(orderForm);
-    
-  
+    this.orderBuy=
 
+      {
+        "buyId": 0,
+        "client": {
+          "clientId": this.clientDetails.clientId,
+          "clientName": this.clientDetails.clientName,
+          "custodian": {
+            "custodianId": this.service.getcustodianid(),
+            "custodianName": "string",
+            "custodianPassword": "string"
+          },
+          "transactionLimit": 0,
+          "balance": 0
+        },   
+          
+        "instrument": this.instrumentDetails,
+        "price": this.price,
+        "quantity": this.quantity,
+        "remainingQty": 0,
+        "buyDate": null,
+        "flag": 0
+      };
+      this.orderSell={
+      
+          "sellId": 0,
+          "client": {
+            "clientId": this.clientDetails.clientId,
+            "clientName": this.clientDetails.clientName,
+            "custodian": {
+              "custodianId": this.service.getcustodianid(),
+              "custodianName": "string",
+              "custodianPassword": "string"
+            },
+            "transactionLimit": 0,
+            "balance": 0
+          },
+          "instrument":this.instrumentDetails,
+
+          "price": this.price,
+          "quantity": this.quantity,
+          "remainingQty": 0,
+          "sellDate": null,
+          "flag": 0
+        
+      }
+  if(this.direction1=="b")
+  {
+  this.http.post("http://localhost:8080/buy",this.orderBuy)
+  .subscribe((result:any)=>{
+    console.log(result)
+    console.log("buy api called")
+  },
+  err=>{
+    console.log(err);
+    })
   }
+  if(this.direction1=="s"){
+    this.http.post("http://localhost:8080/sell",this.orderSell)
+  .subscribe((result:any)=>{
+    console.log(result)
+    console.log("sell api called")
+  },
+  err=>{
+    console.log(err);
+    })
+
 }
+}
+}
+

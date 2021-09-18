@@ -10,12 +10,13 @@
                 <select 
                 id="clientid" 
                 name="clientid" 
-                [(ngModel)]="clientName"
+                [(ngModel)]="clientId" (change)="selected2(clientId)"
+
                 class="form-select">
                    
                     <option 
                     *ngFor="let c of client"
-                    [value]="c.clientName"
+                    [value]="c.clientId"
                     >
                     {{c.clientId}}
                     </option>
@@ -26,7 +27,7 @@
         <div class="form-group">
             <label for="clientname" class="form-label mt-4">Client Name</label>
             <input type="text" class="form-control" id="clientname" name="clientname" aria-describedby="clientname"
-             [value]="clientName"  readonly>
+             [value]="clientDetails.clientName"  readonly>
         </div>
 
         <div class="form-group">
@@ -83,7 +84,7 @@
         <div class="form-group">
             <label for="price" class="form-label mt-4">Price</label>
             <input type="number" class="form-control" required  id="price" name="price" aria-describedby="price"
-             value="price" ngModel />
+             value="price" [(ngModel)]="price" />
         </div>
 
     
@@ -128,3 +129,5 @@
         
 
         </form>
+    
+       

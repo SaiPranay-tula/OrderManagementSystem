@@ -51,14 +51,14 @@ export class LoginComponent implements OnInit {
  
     this.http.post("http://localhost:8080/authenticate",this.custodian)
 .subscribe((result:any)=>{
-  console.log(result);
+  // console.log(result);
 if(result==null){
 this.flag=1;
 
 }
 else{
 this.flag=0;
-// console.log(result);
+console.log(this.custodian);
 this.toastr.success('successfull login','SUCCESS')
 localStorage.setItem('custId',this.custodianid)
 this.service.custodianid=this.custodianid;
