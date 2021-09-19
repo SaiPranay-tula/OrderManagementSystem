@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../services/data.service';
 
 
@@ -27,7 +28,8 @@ export class OrderComponent implements OnInit {
   clientDetails: any;
   orderBuy:any  
   orderSell:any
-  constructor(private http:HttpClient,private service:DataService) {
+  constructor(private http:HttpClient,private service:DataService,
+    private toastr:ToastrService) {
     // this.quantity=
     // this.instruments;
 
@@ -44,7 +46,8 @@ export class OrderComponent implements OnInit {
       "clientName":""
     }
     this.qe=100;
-    this.flag=0;
+    this.flag=1;
+    this.flag1=0;
     this.clientName="";
     this.instrumentId="";
     this.price="";
@@ -92,9 +95,10 @@ console.log(err);
     // console.log(instrument);
     this.http.get("http://localhost:8080/instruments/"+instrumentId1)
 .subscribe((result:any)=>{
-  if(result.expiryDate==null)
-  result.expiryDate="NA";
-this.instrumentDetails = result;
+  this.instrumentDetails = result;
+  // if(this.instrumentDetails.expiryDate==null)
+  // this.instrumentDetails.expiryDate="NA";
+
 
 
 console.log(this.instrumentDetails)
@@ -118,6 +122,10 @@ console.log(err);
   }
 
   selected(){
+    if(this.quantity%25!=0)
+    this.flag=1;
+    else
+    this.flag=0;
 
     
    // console.log(this.direction)
@@ -143,10 +151,7 @@ console.log(err);
   }
   
   RegisterOrder(orderForm: NgForm): void {  
-    if(this.quantity%25!=0)
-    this.flag=1;
-    else
-    this.flag=0;
+    
     // console.log(orderForm.value);
     // console.log(orderForm);
     this.orderBuy=
@@ -199,21 +204,31 @@ console.log(err);
   {
   this.http.post("http://localhost:8080/buy",this.orderBuy)
   .subscribe((result:any)=>{
+    this.toastr.success("Buy successful with id "+result.buyId,"SUCCESS")
+    if(result.flag==0){
+      this.toastr.success("Order matched Sucessfully","SUCCESS")
+    }
     console.log(result)
     console.log("buy api called")
   },
   err=>{
     console.log(err);
+    this.toastr.error("Buy Failed","ERROR")
     })
   }
   if(this.direction1=="s"){
     this.http.post("http://localhost:8080/sell",this.orderSell)
   .subscribe((result:any)=>{
+    this.toastr.success("Sell successful with id "+result.sellId,"SUCCESS")
+    if(result.flag==0){
+      this.toastr.success("Order matched Sucessfully","SUCCESS")
+    }
     console.log(result)
     console.log("sell api called")
   },
   err=>{
     console.log(err);
+    this.toastr.error("Sell Failed","ERROR")
     })
 
 }

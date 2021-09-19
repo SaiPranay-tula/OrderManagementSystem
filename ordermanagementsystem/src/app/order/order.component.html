@@ -75,8 +75,8 @@
 
             <div class="form-group">
                 <label for="date" class="form-label mt-4">Date</label>
-                <input type="text" class="form-control" required  id="date" name="date" aria-describedby="date"
-                 [value]="instrumentDetails.expiryDate"  />
+                <input type="text" class="form-control"  id="date" name="date" aria-describedby="date"
+                 [value]="instrumentDetails.expiryDate==null?'NA':instrumentDetails.expiryDate|date:'dd-MM-yyyy'" readonly />
             </div>
        
 
@@ -117,11 +117,12 @@
                 </select>
                 
         </div>
-        <div *ngIf="flag1" class="alert alert-danger mt-6" role="alert">
+        <div *ngIf="flag1==1" class="alert alert-danger mt-6" role="alert">
             Instrument Quantity is insufficient
              </div>
         <div class="form-group mt-4">
-            <button type="submit" [disabled]="!orderForm.valid"  class="btn btn-primary">Submit</button>
+
+            <button type="submit" [disabled]="!orderForm.valid || flag1==1 || flag==1"  class="btn btn-primary">Submit</button>
         </div>
         
         
