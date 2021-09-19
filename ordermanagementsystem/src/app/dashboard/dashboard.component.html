@@ -3,7 +3,7 @@
 
     <div class=" col-lg-4  col-sm-2 " >
       <ngx-charts-number-card
-        [scheme]="colorScheme"
+        [scheme]="colorScheme1"
         [view]="[350,220]"
         [results]="custodiancard"
         [cardColor]="cardColor">
@@ -13,7 +13,7 @@
     </div>
   <div class=" col-lg-4  col-sm-2 " >
   <ngx-charts-number-card
-    [scheme]="colorScheme"
+    [scheme]="colorScheme2"
     [view]="[350,220]"
     [results]="clientcard"
     [cardColor]="cardColor">
@@ -26,7 +26,7 @@
 
   <div class="col-lg-4 col-sm-2 " >
   <ngx-charts-number-card
-    [scheme]="colorScheme"
+    [scheme]="colorScheme3"
     [view]="[350,220]"
     [results]="buycard"
     [cardColor]="cardColor">
@@ -38,7 +38,7 @@
 
   <div class=" col-lg-4  " >
   <ngx-charts-number-card
-    [scheme]="colorScheme"
+    [scheme]="colorScheme4"
     [view]="[350,220]"
     [results]="sellcard"
     [cardColor]="cardColor">
@@ -49,7 +49,7 @@
 
   <div class="col-lg-4 " >
   <ngx-charts-number-card
-    [scheme]="colorScheme"
+    [scheme]="colorScheme5"
     [view]="[350,220]"
     [results]="transactioncard"
     [cardColor]="cardColor">
@@ -62,7 +62,7 @@
 
     <div class="col-lg-4 " >
     <ngx-charts-number-card
-      [scheme]="colorScheme"
+      [scheme]="colorScheme6"
       [view]="[350,220]"
       [results]="stockcard"
       [cardColor]="cardColor">
@@ -79,9 +79,9 @@
 <br>
 <br>
 
-    <div class="col-sm-4 offset-3" *ngIf="pieflag" >
+    <div class="col-sm-4 offset-2" *ngIf="pieflag" >
     <ngx-charts-advanced-pie-chart
-    [scheme]="colorScheme1"
+    [scheme]="colorScheme7"
   [view]="[1000,300]"
   [gradient]="false"
   [results]="data"

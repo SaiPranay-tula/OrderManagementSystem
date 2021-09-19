@@ -23,10 +23,25 @@ transactioncard=[
 stockcard=[
 {​name:"Total stocks involed",value:0}];
   view:any[]= [700, 400];
-  colorScheme:any = {​
-    domain: ['#5AA454', '#C7B42C', '#AAAAAA']
-  }​;
   colorScheme1:any = {​
+    domain: ['#5AA454']
+  }​;
+  colorScheme2:any = {​
+    domain: [ '#C7B42C']
+  }​;
+  colorScheme3:any = {​
+    domain: [ '#AAAAAA']
+  }​;
+  colorScheme4:any = {​
+    domain: [ '#AAECD7']
+  }​;
+  colorScheme5:any = {​
+    domain: [ '#AF0935']
+  }​;
+  colorScheme6:any = {​
+    domain: [ '#C0947B']
+  }​;
+  colorScheme7:any = {​
     domain: [
       '#6A2C70',
       '#00ADB5',
