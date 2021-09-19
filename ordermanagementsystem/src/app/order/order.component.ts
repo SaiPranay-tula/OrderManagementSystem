@@ -28,6 +28,8 @@ export class OrderComponent implements OnInit {
   clientDetails: any;
   orderBuy:any  
   orderSell:any
+  clientInstrument:any
+  priceflag: number;
   constructor(private http:HttpClient,private service:DataService,
     private toastr:ToastrService) {
     // this.quantity=
@@ -35,6 +37,7 @@ export class OrderComponent implements OnInit {
 
     this.orderBuy={}
     this.orderSell={}
+    this.clientInstrument={}
     this.instrumentDetails={
       "instrumentId": "",
   "instrumentName": "",
@@ -48,6 +51,7 @@ export class OrderComponent implements OnInit {
     this.qe=100;
     this.flag=1;
     this.flag1=0;
+    this.priceflag=0;
     this.clientName="";
     this.instrumentId="";
     this.price="";
@@ -120,19 +124,28 @@ console.log(err);
 })
 
   }
+  selected4(){
+    if(this.price<this.instrumentDetails.faceValue)
+    {
+      this.priceflag=1
+    }
+    else
+    this.priceflag=0
+  }
 
   selected(){
     if(this.quantity%25!=0)
     this.flag=1;
     else
     this.flag=0;
+    
 
     
    // console.log(this.direction)
    this.flag1=0;
     //console.log(this.direction1)
     //alert(this.direction1)
-    if(this.direction1=="s" && this.quantity>this.qe)
+    if(this.direction1=="s" && this.quantity>this.clientInstrument.quantity)
     {
   
       this.flag1=1;
@@ -147,6 +160,20 @@ console.log(err);
     // }
     // else 
     // //call Sell API
+
+  }
+
+  selected3(instrumentId2:any){
+    console.log("op"+this.clientDetails.clientId+""+instrumentId2);
+    
+    this.http.get("http://localhost:8080/clientinstruments/"+this.clientDetails.clientId+""+instrumentId2)
+    .subscribe((result:any)=>{
+      this.clientInstrument=result;
+      console.log(this.clientInstrument);
+    },
+    err=>{
+      console.log(err);
+      })
 
   }
   

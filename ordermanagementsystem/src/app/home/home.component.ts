@@ -13,11 +13,7 @@ export class HomeComponent implements OnInit {
 this.img1="https://196xoc1mzy15yalyx3q9xv31-wpengine.netdna-ssl.com/wp-content/uploads/2020/11/Order-Process-Graphic.png"
   }
   ngOnInit(): void {
-    this.http.get("http://localhost:8080/instruments/custodian/CS001")
-    .subscribe((result:any)=>{
-      console.log(result);
-      this.data=result;
-    })
+    
     console.log(this.data);
     
   }
