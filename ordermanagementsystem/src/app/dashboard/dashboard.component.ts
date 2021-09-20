@@ -22,7 +22,7 @@ transactioncard=[
 {​name:"Total Transactions",value:0}​]
 stockcard=[
 {​name:"Total stocks involed",value:0}];
-  view:any[]= [700, 400];
+  view:any= [700, 400];
   colorScheme1:any = {​
     domain: ['#5AA454']
   }​;
@@ -61,6 +61,7 @@ stockcard=[
   client: any;
   clientcard:any=[];
   custodiancard:any=[]
+  clientdata: any;
   constructor(private http:HttpClient,private service:DataService,
     private toastr:ToastrService) {​ 
       this.client=[]
@@ -133,14 +134,10 @@ stockcard=[
       console.log(err);
       this.pieflag=0;
     })
+    
   }
     
  
     
 }​
-    
-    
-  
-  
-
 

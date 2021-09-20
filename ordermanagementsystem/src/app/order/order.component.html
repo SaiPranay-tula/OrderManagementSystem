@@ -48,7 +48,7 @@
                       
                 </select>
         </div>
-        {{instrumentId}}
+        
         
         <div class="form-group">
             <label for="instrumentname" class="form-label mt-4">Instrument Name</label>
@@ -97,7 +97,7 @@
              value="quantity" placeholder="Enter the values in multiples of 25"
               required [(ngModel)]="quantity" (keyup)="selected()">
         </div>
-        <div *ngIf="flag" class="alert alert-danger mt-6" role="alert">
+        <div *ngIf="flag==1" class="alert alert-danger mt-6" role="alert">
         Quantity must be in multiples of 25
          </div>
         

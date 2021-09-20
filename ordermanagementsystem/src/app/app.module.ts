@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { OrderComponent } from './order/order.component';
@@ -16,6 +16,8 @@ import { HistoryComponent } from './history/history.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { InterceptorService } from './interceptor.service';
+import { GraphComponent } from './graph/graph.component';
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     HomeComponent,
     ReportComponent,
     DashboardComponent,
-    HistoryComponent
+    HistoryComponent,
+    GraphComponent
     
   ],
   imports: [
@@ -60,12 +63,17 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     },
     {
       path:"history", component:HistoryComponent
+    },
+    {
+      path:"", component:HomeComponent
     }
     
 
   ])
   ],
-  
+  providers:[{provide:HTTP_INTERCEPTORS,
+  useClass:InterceptorService,
+  multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -14,13 +14,19 @@ import { Injectable } from "@angular/core";
 
         }
 
-
+        loggedIn(){
+            return !!localStorage.getItem('custId') && !!localStorage.getItem('jwt')
+        }
 
         getcustodianid(){
             return localStorage.getItem('custId');
         }
         logoutUser(){
             localStorage.removeItem('custId')
+            localStorage.removeItem('jwt')
+        }
+        getToken(){
+            return localStorage.getItem('jwt')
         }
         
     }

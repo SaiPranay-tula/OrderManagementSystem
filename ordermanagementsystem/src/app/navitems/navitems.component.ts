@@ -14,6 +14,9 @@ export class NavitemsComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  loggedIn(){
+    return this.service.loggedIn()
+  }
   logout()
 {
   this.service.logoutUser();

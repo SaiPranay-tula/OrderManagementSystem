@@ -44,9 +44,9 @@ export class LoginComponent implements OnInit {
   }
   handleLogin() {
     this.custodian={
-      "custodianId":this.custodianid,
-      "custodianPassword":this.password,
-      "custodianName":""
+      "username":this.custodianid,
+      "password":this.password,
+      
     }
  
     this.http.post("http://localhost:8080/authenticate",this.custodian)
@@ -61,6 +61,7 @@ this.flag=0;
 console.log(this.custodian);
 this.toastr.success('successfull login','SUCCESS')
 localStorage.setItem('custId',this.custodianid)
+localStorage.setItem('jwt',result.jwt);
 this.service.custodianid=this.custodianid;
 this.router.navigate(["/dashboard"]);
 // console.log(this.service.custodianid);

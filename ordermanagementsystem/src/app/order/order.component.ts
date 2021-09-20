@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../services/data.service';
 
@@ -31,7 +32,7 @@ export class OrderComponent implements OnInit {
   clientInstrument:any
   priceflag: number;
   constructor(private http:HttpClient,private service:DataService,
-    private toastr:ToastrService) {
+    private toastr:ToastrService, private router:Router) {
     // this.quantity=
     // this.instruments;
 
@@ -49,7 +50,7 @@ export class OrderComponent implements OnInit {
       "clientName":""
     }
     this.qe=100;
-    this.flag=1;
+    this.flag=0;
     this.flag1=0;
     this.priceflag=0;
     this.clientName="";
@@ -117,11 +118,17 @@ console.log(err);
     this.http.get("http://localhost:8080/clients/"+clientId1)
 .subscribe((result:any)=>{
 this.clientDetails = result;
+this.selected3(this.instrumentId);
 console.log(this.clientDetails);
+this.toastr.info("Your transaction limit is Rs."+this.clientDetails.transactionLimit,'INFO',{
+  timeOut:1000
+})
 },
 err=>{
 console.log(err);
 })
+
+
 
   }
   selected4(){
@@ -134,7 +141,8 @@ console.log(err);
   }
 
   selected(){
-    if(this.quantity%25!=0)
+    this.selected3(this.instrumentId)
+    if(this.quantity%25!=0 )
     this.flag=1;
     else
     this.flag=0;
@@ -173,6 +181,8 @@ console.log(err);
     },
     err=>{
       console.log(err);
+      if(this.direction1=='s')
+      this.flag1=1
       })
 
   }
@@ -227,7 +237,7 @@ console.log(err);
           "flag": 0
         
       }
-  if(this.direction1=="b")
+  if(this.direction1=="b" )
   {
   this.http.post("http://localhost:8080/buy",this.orderBuy)
   .subscribe((result:any)=>{
@@ -237,6 +247,7 @@ console.log(err);
     }
     console.log(result)
     console.log("buy api called")
+    this.router.navigate(['/dashboard'])
   },
   err=>{
     console.log(err);
@@ -252,6 +263,7 @@ console.log(err);
     }
     console.log(result)
     console.log("sell api called")
+    this.router.navigate(['/dashboard'])
   },
   err=>{
     console.log(err);
