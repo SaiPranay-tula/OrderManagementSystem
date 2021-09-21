@@ -16,7 +16,8 @@
                 <tr *ngFor="let t of clientbuys">
 
                     <td>{{t[0]}}</td>
-                    <td>{{t[1]}}</td>
+                    <td *ngIf="t[1]==null">{{zero|currency:"INR"}}</td>
+                    <td *ngIf="t[1]!=null">{{t[1]|currency:"INR"}}</td>
                 </tr>
 
             </tbody>
@@ -30,14 +31,15 @@
             <thead>
                 <tr>
                     <th scope="col">Client ID</th>
-                    <th scope="col">Total Buy Value</th>
+                    <th scope="col">Total Sell Value</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let t of clientsells">
 
                     <td>{{t[0]}}</td>
-                    <td>{{t[1]}}</td>
+                    <td *ngIf="t[1]==null">{{zero|currency:"INR"}}</td>
+                    <td *ngIf="t[1]!=null">{{t[1]|currency:"INR"}}</td>
                 </tr>
 
             </tbody>
@@ -59,7 +61,8 @@
                 <tr *ngFor="let t of custodianbuys">
 
                     <td>{{t[0]}}</td>
-                    <td>{{t[1]}}</td>
+                    <td *ngIf="t[1]==null">{{zero|currency:"INR"}}</td>
+                    <td *ngIf="t[1]!=null">{{t[1]|currency:"INR"}}</td>
                 </tr>
 
             </tbody>
@@ -73,14 +76,15 @@
             <thead>
                 <tr>
                     <th scope="col">Custodian ID</th>
-                    <th scope="col">Total Buy Value</th>
+                    <th scope="col">Total Sell Value</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let t of custodiansells">
 
                     <td>{{t[0]}}</td>
-                    <td>{{t[1]}}</td>
+                    <td *ngIf="t[1]==null">{{zero|currency:"INR"}}</td>
+                    <td *ngIf="t[1]!=null">{{t[1]|currency:"INR"}}</td>
                 </tr>
 
             </tbody>

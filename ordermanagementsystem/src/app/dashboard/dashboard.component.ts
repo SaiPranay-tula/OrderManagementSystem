@@ -43,6 +43,12 @@ stockcard=[
   }​;
   colorScheme7:any = {​
     domain: [
+    '#316B83',
+    '#58508d',
+    '#bc5090',
+    '#ff6361',
+    '#ffa600',
+      
       '#6A2C70',
       '#00ADB5',
       '#630A10',
